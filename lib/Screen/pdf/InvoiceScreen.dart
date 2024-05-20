@@ -57,11 +57,49 @@ class InvoiceModel {
   InvoiceModel({this.name, this.price, this.category});
 }
 
-void generatepdf()
-
-  {
-    final pdf= pw.Document();
-    pdf.addPage()
-  }
+Future<Uint8List> generatePdf() {
+  final pdf = pw.Document();
+  pdf.addPage(
+    pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (context) => pw.Row(children: [
+        pw.Column(
+          children: List.generate(
+            invoiceList.length,
+            (index) => pw.Text(
+              '${invoiceList[index].name} \t\t\t\t\t\t\t\t \n\n\n',
+              style: pw.TextStyle(
+                fontSize: 30,
+              ),
+            ),
+          ),
+        ),
+        pw.Column(
+          children: List.generate(
+            invoiceList.length,
+            (index) => pw.Text(
+              '  ${invoiceList[index].price} \t\t\t\t\t\t\t\t \n\n\n',
+                style: pw.TextStyle(
+                fontSize: 30,
+              ),
+            ),
+          ),
+        ),
+        pw.Column(
+          children: List.generate(
+            invoiceList.length,
+                (index) => pw.Text(
+              '  ${invoiceList[index].category} \t\t\t\t\t\t\t\t \n\n\n',
+              style: pw.TextStyle(
+                fontSize: 30,
+              ),
+            ),
+          ),
+        )
+      ]),
+    ),
+  );
+  return pdf.save();
+}
 
 
