@@ -10,5 +10,12 @@ class PdfScreen extends StatefulWidget {
 class _PdfScreenState extends State<PdfScreen> {
   @override
   Widget build(BuildContext context) {
-    return
+    returnScaffold(
+      appBar: AppBar(title: Text('pdf'),),
+      body: PdfPreview(
+        pdfPreviewPageDecoration: BoxDecoration(color: Colors.white,),
+        build: (format) => generatePdf(),
+      ),
+
+    );
 }
