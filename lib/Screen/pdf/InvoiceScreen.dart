@@ -63,43 +63,51 @@ Future<Uint8List> generatePdf() {
     pw.Page(
       pageFormat: PdfPageFormat.a4,
       build: (context) => pw.Row(children: [
+        pw.SizedBox(
+          height: 20
+        ),
         pw.Column(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: List.generate(
             invoiceList.length,
             (index) => pw.Text(
-              '${invoiceList[index].name} \t\t\t\t\t\t\t\t \n\n\n',
+              '${invoiceList[index].name} ',
               style: pw.TextStyle(
                 fontSize: 30,
               ),
             ),
           ),
         ),
+        pw.SizedBox(width: 90),
         pw.Column(
-          children: List.generate(
-            invoiceList.length,
-            (index) => pw.Text(
-              '  ${invoiceList[index].price} \t\t\t\t\t\t\t\t \n\n\n',
-                style: pw.TextStyle(
-                fontSize: 30,
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+            ...List.generate(
+              invoiceList.length,
+              (index) => pw.Text(
+                '${invoiceList[index].price}',
+                style: pw.TextStyle(fontSize: 30),
               ),
             ),
-          ),
+          ],
+        ),
+        pw.SizedBox(
+          width: 90,
         ),
         pw.Column(
-          children: List.generate(
-            invoiceList.length,
-                (index) => pw.Text(
-              '  ${invoiceList[index].category} \t\t\t\t\t\t\t\t \n\n\n',
-              style: pw.TextStyle(
-                fontSize: 30,
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+            ...List.generate(
+              invoiceList.length,
+              (index) => pw.Text(
+                '${invoiceList[index].category}',
+                style: pw.TextStyle(fontSize: 30),
               ),
             ),
-          ),
-        )
+          ],
+        ),
       ]),
     ),
   );
   return pdf.save();
 }
-
-
